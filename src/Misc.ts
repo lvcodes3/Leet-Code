@@ -155,3 +155,195 @@ console.log(findConsecutiveGroups(input)); // Output: "abc;xyZ"
 //   // Join the groups with a semicolon
 //   return result.join(";");
 // };
+
+// // problem 1 //
+// const promiseAll = (promises: Promise<any>[]): Promise<any> => {
+//   const outputs: any[] = [];
+//   let settledPromiseCounter = 0;
+
+//   return new Promise((resolve, reject) => {
+//     promises.forEach((promise, i) => {
+//       promise
+//         .then((value) => {
+//           outputs[i] = value;
+
+//           settledPromiseCounter++;
+
+//           if (settledPromiseCounter === promises.length) {
+//             resolve(outputs);
+//           }
+//         })
+//         .catch(reject);
+//     });
+//   });
+// };
+
+// // problem 1 testing //
+// const slowPromise = new Promise((res) => {
+//   setTimeout(() => res("done"), 100);
+// });
+// const promises = [
+//   Promise.resolve(2),
+//   Promise.resolve("resolve"),
+//   slowPromise,
+//   Promise.resolve(5),
+//   Promise.resolve(true),
+// ]; // Promise.reject("error")
+// promiseAll(promises).then(console.log);
+
+// // problem 2 - deep comparing (type and value) two variables of any type //
+// const deepEquals = (valueOne: any, valueTwo: any) => {
+//   // variables not of the same type //
+//   if (typeof valueOne !== typeof valueTwo) return false;
+
+//   // primitive types //
+//   if (typeof valueOne !== "object" && typeof valueTwo !== "object") {
+//     // handling NaN (not a number) type //
+//     const isValueOneNaN =
+//       Number.isNaN(valueOne) && typeof valueOne === "number";
+//     const isValueTwoNaN =
+//       Number.isNaN(valueTwo) && typeof valueTwo === "number";
+//     if (isValueOneNaN && isValueTwoNaN) return true;
+
+//     return valueOne === valueTwo;
+//   }
+
+//   // nulls //
+//   if (valueOne === null && valueTwo === null) return true;
+//   if (valueOne === null || valueTwo === null) return false;
+
+//   if (valueOne === valueTwo) return true;
+
+//   // arrays //
+//   if (Array.isArray(valueOne) && Array.isArray(valueTwo)) {
+//     if (valueOne.length !== valueTwo.length) return false;
+//     for (let i = 0; i < valueOne.length; i++) {
+//       if (!deepEquals(valueOne[i], valueTwo[i])) return false;
+//     }
+//     return true;
+//   }
+
+//   if (Array.isArray(valueOne) || Array.isArray(valueTwo)) return false;
+
+//   // objects //
+//   const valueOneKeys = Object.keys(valueOne);
+//   const valueTwoKeys = Object.keys(valueTwo);
+
+//   if (valueOneKeys.length !== valueTwoKeys.length) return false;
+
+//   if (!deepEquals(valueOneKeys, valueTwoKeys)) return false;
+
+//   for (let i = 0; i < valueOneKeys.length; i++) {
+//     const key = valueOneKeys[i];
+//     const valueOneValue = valueOne[key];
+//     const valueTwoValue = valueTwo[key];
+//     if (!deepEquals(valueOneValue, valueTwoValue)) return false;
+//   }
+
+//   return true;
+// };
+
+// // problem 2 testing //
+// // true //
+// console.log("TRUE:");
+// console.log(deepEquals(1, 1));
+// console.log(deepEquals("a", "a"));
+// console.log(deepEquals(NaN, NaN));
+// console.log(deepEquals([], []));
+// console.log(deepEquals([1], [1]));
+// console.log(
+//   deepEquals(
+//     [
+//       [1, 2],
+//       [3, 4],
+//     ],
+//     [
+//       [1, 2],
+//       [3, 4],
+//     ]
+//   )
+// );
+// console.log(deepEquals({}, {}));
+// console.log(deepEquals({ a: 1 }, { a: 1 }));
+// console.log(deepEquals({ a: 1, obj: { b: 2 } }, { a: 1, obj: { b: 2 } }));
+// console.log(deepEquals(null, null));
+// console.log(deepEquals(undefined, undefined));
+// // false //
+// console.log("FALSE:");
+// console.log(deepEquals(1, 0));
+// console.log(deepEquals("a", "b"));
+// console.log(deepEquals(NaN, 10));
+// console.log(deepEquals(NaN, "NaN"));
+// console.log(deepEquals([], [1]));
+// console.log(deepEquals([10], [1]));
+// console.log(
+//   deepEquals(
+//     [
+//       [1, 2, 3],
+//       [3, 4],
+//     ],
+//     [
+//       [1, 2],
+//       [3, 4],
+//     ]
+//   )
+// );
+// console.log(
+//   deepEquals(
+//     [
+//       [1, 2],
+//       ["3", 4],
+//     ],
+//     [
+//       [1, 2],
+//       [3, 4],
+//     ]
+//   )
+// );
+// console.log(deepEquals({}, { a: 1 }));
+// console.log(deepEquals({ a: 1 }, { a: 2 }));
+// console.log(deepEquals({ a: 1, obj: { b: 2 } }, { a: 1, obj: { b: 4 } }));
+// console.log(deepEquals(null, undefined));
+// console.log(deepEquals(undefined, {}));
+
+// problem 3 //
+// input string in ISODateFormat - "2022-06-02T00:00:00.000-07-00" //
+// should return an object { hours: number, minutes: number, seconds: number } //
+interface timerInfoInterface {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+const updateTimer = (
+  dateString: string,
+  timerInfo: timerInfoInterface
+): void => {
+  const date: Date = new Date(dateString);
+
+  // update timer every half a second //
+  setInterval(() => {
+    const timeTillDate = date.getTime() - Date.now();
+
+    const seconds = Math.floor(timeTillDate / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+
+    timerInfo.hours = hours;
+    timerInfo.minutes = minutes % 60;
+    timerInfo.seconds = seconds % 60;
+  }, 500);
+};
+
+// problem 3 testing //
+const dateString = "2025-06-02T00:00:00.000-07:00";
+const timerInfo = {
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+};
+
+updateTimer(dateString, timerInfo);
+
+// logging timer info periodically (for demonstration) //
+setInterval(() => console.log(timerInfo), 1000);
