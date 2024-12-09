@@ -1,0 +1,2 @@
+run for ES Modules: 
+node --loader ts-node/esm src/Arrays.ts
