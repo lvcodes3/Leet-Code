@@ -8,7 +8,7 @@
  *
  * Space Complexity: O(1), no extra space needed.
  */
-function strStr(haystack: string, needle: string): number {
+export function strStr(haystack: string, needle: string): number {
   if (needle.length === 0) return 0;
 
   for (let i = 0; i <= haystack.length - needle.length; i++) {
@@ -27,14 +27,6 @@ function strStr(haystack: string, needle: string): number {
   return -1;
 }
 
-// // testing //
-// console.log(strStr("sadbutsad", "sad")); // 0
-// console.log(strStr("leetcode", "leeto")); // -1
-// console.log(strStr("butsad", "ad")); // 4
-// console.log(strStr("aaaaa", "bba")); // -1
-// console.log(strStr("", "")); // 0
-// console.log(strStr("a", "a")); // 0
-
 /**
  * 125. Valid Palindrome - Easy
  *
@@ -52,7 +44,7 @@ function strStr(haystack: string, needle: string): number {
  *
  * Space Complexity: O(1), transformed string stored in s, no additional data structures created.
  */
-function isPalindrome1(s: string): boolean {
+export function isPalindrome1(s: string): boolean {
   // convert all uppercase alpha characters to lowercase - O(N) //
   s = s.toLowerCase();
 
@@ -84,7 +76,7 @@ function isPalindrome1(s: string): boolean {
  *
  * Space Complexity: O(1), transformed string stored in s, no additional data structures created.
  */
-function isPalindrome2(s: string): boolean {
+export function isPalindrome2(s: string): boolean {
   // helper function //
   function isAlphaNumeric(c: string): boolean {
     // match a single alphanumeric character //
@@ -116,12 +108,3 @@ function isPalindrome2(s: string): boolean {
 
   return true;
 }
-
-// // testing //
-// console.log(isPalindrome1("A man, a plan, a canal: Panama")); // true
-// console.log(isPalindrome1("race a car")); // false
-// console.log(isPalindrome1(" ")); // true
-
-// console.log(isPalindrome2("A man, a plan, a canal: Panama")); // true
-// console.log(isPalindrome2("race a car")); // false
-// console.log(isPalindrome2(" ")); // true
