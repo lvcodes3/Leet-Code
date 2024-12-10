@@ -1,34 +1,36 @@
 /**
- * Finding consecutive substrings of alphabet inside input string.
+ * Finding consecutive substrings of alphabet inside string.
  *
+ * Time Complexity: O(N)
+ *
+ * Space Complexity: O(N)
  */
-const findConsecutiveGroups = (input: string) => {
-  // validate input to be string and only contain alphabetic characters //
-  if (typeof input !== "string") {
-    throw new Error("Input must be of type string.");
-  }
+export const findConsecutiveGroups = (input: string): string => {
+  // string must only contain alphabetic characters //
   if (!/^[a-zA-Z]+$/.test(input)) {
+    /*
+      regex explained:
+      ^        - anchors the pattern to the start of the string
+      [a-zA-Z] - character class that matches any single character in the range a-z or A-Z
+      +        - quantifier specifies that the previous pattern must appear one or more times
+      $        - anchors the pattern to the end of the string
+    */
     throw new Error("Input must only contain alphabetic characters.");
   }
 
-  // main process ///
   let result: string[] = [];
   let currentGroup: string = input[0];
 
   for (let i = 1; i < input.length; i++) {
-    const prevCharCode = input.charCodeAt(i - 1);
-    const currentCharCode = input.charCodeAt(i);
+    const prevCharCode = input[i - 1].toLowerCase().charCodeAt(0);
+    const currentCharCode = input[i].toLowerCase().charCodeAt(0);
 
-    // previous and current character are in sequence AND matches the same case //
-    if (
-      (currentCharCode === prevCharCode + 1 &&
-        /[a-z]/.test(input[i - 1]) &&
-        /[a-z]/.test(input[i])) ||
-      (/[A-Z]/.test(input[i - 1]) && /[A-Z]/.test(input[i]))
-    ) {
+    // characters are alphabetically consecutive //
+    if (currentCharCode === prevCharCode + 1) {
+      // append to the current group //
       currentGroup += input[i];
     }
-    // not in sequence //
+    //  characters are not alphabetically consecutive //
     else {
       // if long enough, extract current group sequence //
       if (currentGroup.length >= 3) {
@@ -48,10 +50,9 @@ const findConsecutiveGroups = (input: string) => {
   return result.join(";");
 };
 
-// Example usage
-const input = "abciOJxyZ";
-console.log(findConsecutiveGroups(input)); // Output: "abc;xyZ"
-
+/**
+ * asdf
+ */
 // function splitAndReverseMRI(mri, arr) {
 //   // Step 1: Reverse the entire string
 //   const reversedMRI = mri.split("").reverse().join("");
@@ -309,41 +310,41 @@ console.log(findConsecutiveGroups(input)); // Output: "abc;xyZ"
 // problem 3 //
 // input string in ISODateFormat - "2022-06-02T00:00:00.000-07-00" //
 // should return an object { hours: number, minutes: number, seconds: number } //
-interface timerInfoInterface {
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
+// interface timerInfoInterface {
+//   hours: number;
+//   minutes: number;
+//   seconds: number;
+// }
 
-const updateTimer = (
-  dateString: string,
-  timerInfo: timerInfoInterface
-): void => {
-  const date: Date = new Date(dateString);
+// const updateTimer = (
+//   dateString: string,
+//   timerInfo: timerInfoInterface
+// ): void => {
+//   const date: Date = new Date(dateString);
 
-  // update timer every half a second //
-  setInterval(() => {
-    const timeTillDate = date.getTime() - Date.now();
+//   // update timer every half a second //
+//   setInterval(() => {
+//     const timeTillDate = date.getTime() - Date.now();
 
-    const seconds = Math.floor(timeTillDate / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
+//     const seconds = Math.floor(timeTillDate / 1000);
+//     const minutes = Math.floor(seconds / 60);
+//     const hours = Math.floor(minutes / 60);
 
-    timerInfo.hours = hours;
-    timerInfo.minutes = minutes % 60;
-    timerInfo.seconds = seconds % 60;
-  }, 500);
-};
+//     timerInfo.hours = hours;
+//     timerInfo.minutes = minutes % 60;
+//     timerInfo.seconds = seconds % 60;
+//   }, 500);
+// };
 
-// problem 3 testing //
-const dateString = "2025-06-02T00:00:00.000-07:00";
-const timerInfo = {
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-};
+// // problem 3 testing //
+// const dateString = "2025-06-02T00:00:00.000-07:00";
+// const timerInfo = {
+//   hours: 0,
+//   minutes: 0,
+//   seconds: 0,
+// };
 
-updateTimer(dateString, timerInfo);
+// updateTimer(dateString, timerInfo);
 
-// logging timer info periodically (for demonstration) //
-setInterval(() => console.log(timerInfo), 1000);
+// // logging timer info periodically (for demonstration) //
+// setInterval(() => console.log(timerInfo), 1000);
