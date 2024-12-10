@@ -1,4 +1,4 @@
-class ListNode {
+export class ListNode {
   val: number;
   next: ListNode | null;
 
@@ -19,7 +19,7 @@ class ListNode {
  *
  * Space Complexity: O(1), no additional data structures or memory used.
  */
-function mergeTwoLists(
+export function mergeTwoLists(
   list1: ListNode | null,
   list2: ListNode | null
 ): ListNode | null {
@@ -62,7 +62,10 @@ function mergeTwoLists(
   return head;
 }
 
-function displayList(head: ListNode | null): void {
+/**
+ * Helper Functions
+ */
+export function displayList(head: ListNode | null): string {
   let currNode = head;
   let outputString = "";
 
@@ -73,26 +76,5 @@ function displayList(head: ListNode | null): void {
 
   outputString += "null";
 
-  console.log(outputString);
+  return outputString;
 }
-
-// // testing //
-// // list 1 //
-// let l1n1 = new ListNode(1);
-// let l1n2 = new ListNode(2);
-// let l1n3 = new ListNode(5);
-// let l1n4 = new ListNode(9);
-// let l1n5 = new ListNode(12);
-// l1n1.next = l1n2;
-// l1n2.next = l1n3;
-// l1n3.next = l1n4;
-// l1n4.next = l1n5;
-
-// // list 2 //
-// let l2n1 = new ListNode(0);
-// let l2n2 = new ListNode(4);
-// let l2n3 = new ListNode(10);
-// l2n1.next = l2n2;
-// l2n2.next = l2n3;
-
-// displayList(mergeTwoLists(l1n1, l2n1)); // 0 -> 1 -> 2 -> 4 -> 5 -> 9 -> 10 -> 12 -> null
