@@ -63,6 +63,42 @@ export function mergeTwoLists(
 }
 
 /**
+ * 141. Linked List Cycle - Easy
+ *
+ * Given head, the head of a linked list, determine if the linked list has a cycle in it.
+ * There is a cycle in a linked list if there is some node in the list that can be reached again by
+ * continuously following the next pointer. Internally, pos is used to denote the index of the node
+ * that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+ * Return true if there is a cycle in the linked list. Otherwise, return false.
+ *
+ * Floyd's Cycle Detection (two-pointer technique)
+ *
+ * Time Complexity: O(N)
+ *
+ * Space Complexity: O(1)
+ */
+export function hasCycle(head: ListNode | null): boolean {
+  if (head === null) return false;
+
+  let slowPointer: ListNode | null = head;
+  let fastPointer: ListNode | null = head;
+
+  while (fastPointer !== null && fastPointer.next !== null) {
+    // move slow pointer one step //
+    slowPointer = slowPointer!.next;
+    // move fast pointer two steps //
+    fastPointer = fastPointer.next.next;
+
+    // cycle detected //
+    if (slowPointer === fastPointer) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
  * Helper Functions
  */
 export function displayList(head: ListNode | null): string {
