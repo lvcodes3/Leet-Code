@@ -11,7 +11,7 @@ class TreeNode {
 }
 
 /**
- * 530. Minimum Absolute Difference in BST
+ * 530. Minimum Absolute Difference in BST - Easy
  *
  * Given the root of a Binary Search Tree (BST), return the minimum absolute difference between
  * the values of any two different nodes in the tree.
@@ -22,7 +22,7 @@ class TreeNode {
  *
  * This solution satisfies the constraints of O(N) time and O(1) additional space (disregarding recursion stack).
  */
-function getMinimumDifference(root: TreeNode | null): number {
+function getMinimumDifferenceInBST(root: TreeNode | null): number {
   let minimumDifference: number = Infinity;
 
   // stores the value of the last visited node //
@@ -52,14 +52,14 @@ function getMinimumDifference(root: TreeNode | null): number {
   return minimumDifference;
 }
 
-// testing //
-const tn1 = new TreeNode(4);
-const tn2 = new TreeNode(2);
-const tn3 = new TreeNode(6);
-const tn4 = new TreeNode(1);
-const tn5 = new TreeNode(3);
-tn1.left = tn2;
-tn2.right = tn3;
-tn2.left = tn4;
-tn2.right = tn5;
-console.log(getMinimumDifference(tn1)); // Expected: 1
+// // testing //
+// const tn1 = new TreeNode(4);
+// const tn2 = new TreeNode(2);
+// const tn3 = new TreeNode(6);
+// const tn4 = new TreeNode(1);
+// const tn5 = new TreeNode(3);
+// tn1.left = tn2;
+// tn2.right = tn3;
+// tn2.left = tn4;
+// tn2.right = tn5;
+// console.log(getMinimumDifferenceInBST(tn1)); // 1

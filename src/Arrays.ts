@@ -1,5 +1,5 @@
 /**
- * 88. Merge Sorted Array - Easy
+ * 88. Merge Sorted Arrays - Easy
  *
  * You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n,
  * representing the number of elements in nums1 and nums2 respectively.
@@ -14,8 +14,7 @@
  *
  * Space Complexity: O(1)
  */
-/*
-function merge(
+function mergeSortedArrays(
   nums1: number[],
   m: number,
   nums2: number[],
@@ -51,11 +50,10 @@ function merge(
   return nums1;
 }
 
-// testing //
-console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3)); // [1, 2, 2, 3, 5, 6]
-console.log(merge([1], 1, [], 0)); // [1]
-console.log(merge([0], 0, [1], 1)); // [1]
-*/
+// // testing //
+// console.log(mergeSortedArrays([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3)); // [1, 2, 2, 3, 5, 6]
+// console.log(mergeSortedArrays([1], 1, [], 0)); // [1]
+// console.log(mergeSortedArrays([0], 0, [1], 1)); // [1]
 
 /**
  * 26. Remove Duplicates From Sorted Array - Easy
@@ -73,8 +71,7 @@ console.log(merge([0], 0, [1], 1)); // [1]
  *
  * Space Complexity: O(1)
  */
-/*
-function removeDuplicates(nums: number[]): number {
+function removeDuplicatesFromSortedArray(nums: number[]): number {
   if (nums.length === 0) return 0;
 
   let uniqueIndex = 0;
@@ -89,11 +86,10 @@ function removeDuplicates(nums: number[]): number {
   return uniqueIndex + 1; // count of unique elements
 }
 
-// testing //
-console.log(removeDuplicates([1, 1, 2, 2, 3, 3])); // 3
-console.log(removeDuplicates([])); // 0
-console.log(removeDuplicates([1, 2, 2, 3, 3, 3, 4, 4])); // 4
-*/
+// // testing //
+// console.log(removeDuplicatesFromSortedArray([1, 1, 2, 2, 3, 3])); // 3
+// console.log(removeDuplicatesFromSortedArray([])); // 0
+// console.log(removeDuplicatesFromSortedArray([1, 2, 2, 3, 3, 3, 4, 4])); // 4
 
 /**
  * 169. Majority Element - Easy
@@ -112,7 +108,6 @@ console.log(removeDuplicates([1, 2, 2, 3, 3, 3, 4, 4])); // 4
  * Space Complexity: O(N) - We use a hash map to count occurences of each number in the array. This consumes extra
  * space proportional to the number of unique elements in the array, O(N).
  */
-/*
 function majorityElement1(nums: number[]): number {
   // count unique numbers //
   const hashMap: { [key: number]: number } = {};
@@ -134,7 +129,6 @@ function majorityElement1(nums: number[]): number {
 
   throw new Error("No majority element found.");
 }
-*/
 
 /**
  * Optimized Solution: Boyer-Moore Voting Algorithm:
@@ -145,7 +139,6 @@ function majorityElement1(nums: number[]): number {
  * Space Complexity: O(1) - We use a fixed number of variables (candidate and count) regardless of input size,
  * no hash maps or arrays.
  */
-/*
 function majorityElement2(nums: number[]): number {
   let candidate = 0;
   let count = 0;
@@ -175,15 +168,14 @@ function majorityElement2(nums: number[]): number {
   throw new Error("No majority element found.");
 }
 
-// testing //
-console.log(majorityElement1([3, 2, 3])); // 3
-console.log(majorityElement1([2, 2, 1, 1, 1, 2, 2])); // 2
-console.log(majorityElement1([1, 2, 1, 2])); // Error
+// // testing //
+// console.log(majorityElement1([3, 2, 3])); // 3
+// console.log(majorityElement1([2, 2, 1, 1, 1, 2, 2])); // 2
+// console.log(majorityElement1([1, 2, 1, 2])); // Error
 
-console.log(majorityElement2([3, 2, 3])); // 3
-console.log(majorityElement2([2, 2, 1, 1, 1, 2, 2])); // 2
-console.log(majorityElement2([2, 1, 1, 2])); // Error
-*/
+// console.log(majorityElement2([3, 2, 3])); // 3
+// console.log(majorityElement2([2, 2, 1, 1, 1, 2, 2])); // 2
+// console.log(majorityElement2([2, 1, 1, 2])); // Error
 
 /**
  * 189. Rotate Array - Medium
@@ -228,11 +220,11 @@ function rotateArray2(nums: number[], k: number): number[] {
   return rotatedNums;
 }
 
-// testing //
-console.log("rotate array 1:");
-console.log(rotateArray1([1, 2, 3, 4, 5, 6, 7], 3)); // [5, 6, 7, 1, 2, 3, 4]
-console.log(rotateArray1([-1, -100, 3, 99], 2), "\n"); // [3, 99, -1, -100]
+// // testing //
+// console.log("rotate array 1:");
+// console.log(rotateArray1([1, 2, 3, 4, 5, 6, 7], 3)); // [5, 6, 7, 1, 2, 3, 4]
+// console.log(rotateArray1([-1, -100, 3, 99], 2), "\n"); // [3, 99, -1, -100]
 
-console.log("rotate array 2:");
-console.log(rotateArray2([1, 2, 3, 4, 5, 6, 7], 3));
-console.log(rotateArray2([-1, -100, 3, 99], 2));
+// console.log("rotate array 2:");
+// console.log(rotateArray2([1, 2, 3, 4, 5, 6, 7], 3)); // [5, 6, 7, 1, 2, 3, 4]
+// console.log(rotateArray2([-1, -100, 3, 99], 2)); // [3, 99, -1, -100]
