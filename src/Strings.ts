@@ -108,3 +108,56 @@ export function isPalindrome2(s: string): boolean {
 
   return true;
 }
+
+/**
+ * 151. Reverse Words In A String - Medium
+ *
+ * Given an input string s, reverse the order of the words. A word is defined as a sequence of non-space characters.
+ * The words in s will be separated by at least one space. Return a string of the words in reverse order concatenated
+ * by a single space. Note that s may contain leading or trailing spaces or multiple spaces between two words.
+ * The returned string should only have a single space separating the words. Do not include any extra spaces.
+ *
+ * Ex: "the sky is blue" -> "blue is sky the"
+ *     "a good   example" -> "example good a"
+ *
+ * Time Complexity: O(N)
+ *
+ * Space Complexity: O(N) - arrays created during split and reverse
+ */
+export function reverseWords(s: string): string {
+  // trim() - trim leading and ending spaces in the string - O(N)
+  // split(/\s+/) - regex splitting, splits the string by one or more spaces into an array - O(N)
+  // reverse() - reverses the array - O(N)
+  // join() - converts the array to a string joined by single spaces in between - O(N)
+  return s.trim().split(/\s+/).reverse().join(" ");
+}
+
+/**
+ * 14. Longest Common Prefix - Easy
+ *
+ * Write a function to find the longest common prefix string amongst an array of strings.
+ * If there is no common prefix, return an empty string "".
+ *
+ * Ex: strs = ["flower", "flow", "flight"] -> "fl"
+ *
+ * Time Complexity: O(N * M) | N = number of strings in the array | M is the length of the shortest string
+ *
+ * Space Complexity: O(1)
+ */
+export function longestCommonPrefix(strs: string[]): string {
+  // base cases //
+  if (strs.length === 0) return "";
+  if (strs.length === 1) return strs[0];
+
+  let prefix = strs[0];
+
+  for (let i = 1; i < strs.length; i++) {
+    // shorten the prefix until it matches the start of strs[i] //
+    while (!strs[i].startsWith(prefix)) {
+      prefix = prefix.slice(0, -1); // remove the last character from the prefix
+      if (prefix === "") return ""; // no common prefix
+    }
+  }
+
+  return prefix;
+}

@@ -34,4 +34,26 @@ describe("Strings Leet Code Problems", () => {
 
     expect(StringFunctions.isPalindrome2(" ")).toBeTruthy();
   });
+
+  test("Reverse Words In A String", () => {
+    expect(StringFunctions.reverseWords("the sky is blue")).toBe(
+      "blue is sky the"
+    );
+
+    expect(StringFunctions.reverseWords("  hello world  ")).toBe("world hello");
+
+    expect(StringFunctions.reverseWords("a good   example")).toBe(
+      "example good a"
+    );
+  });
+
+  test("Longest Common Prefix", () => {
+    expect(
+      StringFunctions.longestCommonPrefix(["flower", "flow", "flight"])
+    ).toBe("fl");
+
+    expect(StringFunctions.longestCommonPrefix(["dog", "racecar", "car"])).toBe(
+      ""
+    );
+  });
 });
