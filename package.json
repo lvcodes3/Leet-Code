@@ -13,7 +13,8 @@
     "test-bsts": "npx jest src/tests/BinarySearchTrees.test.ts",
     "test-lls": "npx jest src/tests/LinkedLists.test.ts",
     "test-strings": "npx jest src/tests/Strings.test.ts",
-    "test-misc": "npx jest src/tests/Misc.test.ts"
+    "test-misc": "npx jest src/tests/Misc.test.ts",
+    "test-js": "npx jest src/tests/JS.test.ts"
   },
   "keywords": [],
   "author": "",
