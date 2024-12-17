@@ -124,4 +124,39 @@ describe("Misc Problems", () => {
     // Misc.updateTimer(dateString, timerInfo);
     // setInterval(() => console.log(timerInfo), 1000);
   });
+
+  test("Mean And Sum", () => {
+    expect(Misc.meanAndMode([1, 2, 7, 3, 2])).toBe("3 2");
+
+    expect(Misc.meanAndMode([])).toBe("0 0");
+
+    expect(Misc.meanAndMode([-5, 2, 8, 4, -2, 4])).toBe("1 4");
+  });
+
+  test("Jars", () => {
+    expect(Misc.setOfJars([])).toBe(0);
+
+    expect(Misc.setOfJars([5])).toBe(5);
+
+    expect(Misc.setOfJars([5, 30, 99, 60, 5, 10])).toBe(114);
+
+    expect(Misc.setOfJars([-10, 40, 10, 24, 45])).toBe(85);
+  });
+
+  test("Hop Skip Jump", () => {
+    expect(
+      Misc.hopSkipJump([
+        [29, 8, 37],
+        [15, 41, 3],
+        [1, 10, 14],
+      ])
+    ).toBe(41);
+
+    expect(
+      Misc.hopSkipJump([
+        [10, 8],
+        [41, 3],
+      ])
+    ).toBe(8);
+  });
 });

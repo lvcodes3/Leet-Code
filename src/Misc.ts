@@ -195,6 +195,145 @@ export function updateTimer(
 }
 
 /**
+ * Arithmetic Mean & Mode
+ *
+ * Time Complexity: O(N), where N is the number of integers.
+ *
+ * Space Complexity: O(N), due to the frequency map.
+ */
+export function meanAndMode(integers: number[]): string {
+  // empty case //
+  if (integers.length === 0) return "0 0";
+
+  // calculate the mean //
+  const sum: number = integers.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  );
+  const mean: number = Math.floor(sum / integers.length);
+
+  // calculate the mode //
+  const frequencyMap: Map<number, number> = new Map<number, number>();
+
+  for (const integer of integers) {
+    frequencyMap.set(integer, (frequencyMap.get(integer) || 0) + 1);
+  }
+
+  let mode: number = integers[0];
+  let maxFrequency: number = frequencyMap.get(mode) || 0;
+
+  for (const [key, value] of frequencyMap) {
+    if (value > maxFrequency) {
+      mode = key;
+      maxFrequency = value;
+    }
+  }
+
+  return `${mean} ${mode}`;
+}
+
+/**
+ * Jars (Dynamic Programming)
+ *
+ * Time Complexity:
+ *
+ * Space Complexity:
+ */
+export function setOfJars(jars: number[]): number {
+  const numJars = jars.length;
+
+  if (numJars === 0) return 0;
+  if (numJars === 1) return jars[0];
+
+  // initialize the array //
+  const arr: number[] = new Array(numJars).fill(0);
+
+  // base cases //
+  arr[0] = jars[0];
+  arr[1] = Math.max(jars[0], jars[1]);
+
+  // fill the array //
+  for (let i = 2; i < numJars; i++) {
+    arr[i] = Math.max(arr[i - 1], jars[i] + arr[i - 2]);
+  }
+
+  // return the last element in the array holding the max number //
+  return arr[numJars - 1];
+}
+
+/**
+ * Hop Skip Jump
+ *
+ * Find the last cell, going counter-clockwise in an array, skipping 1 cell in between moves.
+ *
+ * Time Complexity: O(N * M), where N is the nuber of rows and M is the number of columns
+ *
+ * Space Complexity: O(N * M), due to the visited matrix
+ */
+export function hopSkipJump(matrix: number[][]): number {
+  // matrix dimensions //
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+
+  // anti-clockwise directions: down, left, up, right //
+  const directions: number[][] = [
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+    [0, 1],
+  ];
+
+  // visited matrix to keep track of visited cells //
+  const visited: boolean[][] = Array.from({ length: rows }, () =>
+    Array(cols).fill(false)
+  );
+
+  // starting position //
+  let x = 0,
+    y = 0;
+  visited[x][y] = true;
+
+  // initial direction //
+  let directionIndex = 0;
+  let cellsVisited = 1;
+
+  while (cellsVisited < rows * cols) {
+    // attemp to move two steps //
+    let steps: number = 0;
+
+    while (steps < 2) {
+      let newX = x + directions[directionIndex][0];
+      let newY = y + directions[directionIndex][1];
+
+      // new position is in bounds and not visited //
+      if (
+        newX >= 0 &&
+        newX < rows &&
+        newY >= 0 &&
+        newY < cols &&
+        !visited[newX][newY]
+      ) {
+        x = newX;
+        y = newY;
+        visited[x][y] = true;
+        cellsVisited++;
+        steps++;
+      }
+      // unable to move in this direction //
+      else {
+        break;
+      }
+    }
+
+    // change direction after attempting to move 2 steps //
+    directionIndex = (directionIndex + 1) % 4;
+  }
+
+  // return the last visited cell //
+  return matrix[x][y];
+}
+
+/**
  * MISC
  */
 /*
