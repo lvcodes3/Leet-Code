@@ -45,13 +45,13 @@ export function createCounter1(n: number): () => number {
  *
  * Space Complexity: O(1)
  */
-type Counter = {
+type Counter2665 = {
   increment: () => number;
   decrement: () => number;
   reset: () => number;
 };
 
-export function createCounter2(init: number): Counter {
+export function createCounter2(init: number): Counter2665 {
   let currentValue: number = init;
 
   return {
@@ -79,12 +79,12 @@ export function createCounter2(init: number): Counter {
  *
  * Space Complexity: O(1)
  */
-type ToBeOrNotToBe = {
+type ToBeOrNotToBe2704 = {
   toBe: (val: any) => boolean;
   notToBe: (val: any) => boolean;
 };
 
-export function expect(val: any): ToBeOrNotToBe {
+export function expect(val: any): ToBeOrNotToBe2704 {
   return {
     toBe(val2) {
       if (val === val2) return true;
@@ -211,9 +211,9 @@ export function reduce(
  *
  * Space Complexity: O(1)
  */
-type F = (x: number) => number;
+type Function2629 = (x: number) => number;
 
-export function compose(functions: F[]): F {
+export function compose(functions: Function2629[]): Function2629 {
   return function (x) {
     let val: number = x;
 
@@ -236,14 +236,198 @@ export function compose(functions: F[]): F {
  *
  * Space Complexity: O(1);
  */
-type JSONValue =
+type JSONValue2703 =
   | null
   | boolean
   | number
   | string
-  | JSONValue[]
-  | { [key: string]: JSONValue };
+  | JSONValue2703[]
+  | { [key: string]: JSONValue2703 };
 
-export function argumentsLength(...args: JSONValue[]): number {
+export function argumentsLength(...args: JSONValue2703[]): number {
   return args.length;
+}
+
+/**
+ * 2666. Allow One Function Call - Easy
+ *
+ * Given a function fn, return a new function that is identical to the original function except that it ensures fn is called at most once.
+ * The first time the returned function is called, it should return the same result as fn.
+ * Every subsequent time it is called, it should return undefined.
+ *
+ * Time Complexity: O(1)
+ *
+ * Space Complexity: O(1)
+ */
+type JSONValue2666 =
+  | null
+  | boolean
+  | number
+  | string
+  | JSONValue2666[]
+  | { [key: string]: JSONValue2666 };
+
+type OnceFn2666 = (...args: JSONValue2666[]) => JSONValue2666 | undefined;
+
+export function once(fn: Function): OnceFn2666 {
+  let hasBeenCalled = false;
+
+  return function (...args) {
+    if (!hasBeenCalled) {
+      hasBeenCalled = true;
+      return fn(...args);
+    } else {
+      return undefined;
+    }
+  };
+}
+
+/**
+ * 2623. Memoize - Medium
+ *
+ * Given a function fn, return a memoized version of that function.
+ * A memoized function is a function that will never be called twice with the same inputs. Instead it will return a cached value.
+ *
+ * You can assume there are 3 possible input functions: sum, fib, and factorial.
+ * sum accepts two integers a and b and returns a + b. Assume that if a value has already been cached for the arguments
+ * (b, a) where a != b, it cannot be used for the arguments (a, b).
+ * For example, if the arguments are (3, 2) and (2, 3), two separate calls should be made.
+ * fib accepts a single integer n and returns 1 if n <= 1 or fib(n - 1) + fib(n - 2) otherwise.
+ * factorial accepts a single integer n and returns 1 if n <= 1 or factorial(n - 1) * n otherwise.
+ *
+ * Time Complexity: O(1) // TODO: check
+ *
+ * Space Complexity: O(N) // TODO: check
+ */
+type Function2623 = (...params: number[]) => number;
+
+export function memoize(fn: Function2623): Function2623 {
+  const cache: { [key: string]: number } = {};
+
+  return function (...args): number {
+    const key = JSON.stringify(args);
+
+    // memoized //
+    if (key in cache) {
+      return cache[key];
+    }
+
+    // not memoized //
+    const result = fn(...args);
+    cache[key] = result;
+
+    return result;
+  };
+}
+
+/**
+ * 2727. Is Object Empty - Easy
+ *
+ * Given an object or an array, return if it is empty.
+ * An empty object contains no key-value pairs.
+ * An empty array contains no elements.
+ *
+ * Time Complexity:
+ *
+ * Space Complexity:
+ */
+type JSONValue2727 =
+  | null
+  | boolean
+  | number
+  | string
+  | JSONValue2727[]
+  | { [key: string]: JSONValue2727 };
+
+type Obj2727 = Record<string, JSONValue2727> | JSONValue2727[];
+
+export function isObjEmpty(obj: Obj2727): boolean {
+  if (Array.isArray(obj)) {
+    return obj.length === 0;
+  }
+
+  return Object.keys(obj).length === 0;
+}
+
+/**
+ * 2677. Chunk Array - Easy
+ *
+ * Given an array arr and a chunk size size, return a chunked array.
+ * A chunked array contains the original elements in arr, but consists of subarrays each of length size.
+ * The length of the last subarray may be less than size if arr.length is not evenly divisible by size.
+ *
+ * Ex: arr = [1, 2, 3, 4, 5], size = 1
+ *     [[1], [2], [3], [4], [5]]
+ *
+ * Time Complexity: O(N), where N is the length of the input array. O(K) for slice where K = size.
+ *
+ * Space Complexity: O(N), because of chunkedArray.
+ */
+type JSONValue2677 =
+  | null
+  | boolean
+  | number
+  | string
+  | JSONValue2677[]
+  | { [key: string]: JSONValue2677 };
+
+// type Obj2677 = Record<string, JSONValue2677> | Array<JSONValue2677>;
+type Obj2677 = JSONValue2677;
+
+export function chunkArray(arr: Obj2677[], size: number): Obj2677[][] {
+  const chunkedArray: Obj2677[][] = [];
+
+  for (let i = 0; i < arr.length; i += size) {
+    chunkedArray.push(arr.slice(i, i + size));
+  }
+
+  return chunkedArray;
+}
+
+/**
+ * 2619. Array Prototype Last - Easy
+ *
+ * Write code that enhances all arrays such that you can call the array.last() method on any array and it will return the last element.
+ * If there are no elements in the array, it should return -1.
+ *
+ * Time Complexity: O(1)
+ *
+ * Space Complexity: O(1)
+ */
+// extend the Array interface //
+declare global {
+  interface Array<T> {
+    last(): T | -1;
+  }
+}
+
+Array.prototype.last = function () {
+  if (this.length === 0) return -1;
+  return this[this.length - 1];
+};
+
+/**
+ * 2724. Sort By - Easy
+ *
+ * Given an array arr and a function fn, return a sorted array sortedArr.
+ * You can assume fn only returns numbers and those numbers determine the sort order of sortedArr.
+ * sortedArr must be sorted in ascending order by fn output.
+ * You may assume that fn will never duplicate numbers for a given array.
+ *
+ * Time Complexity:
+ *
+ * Space Complexity:
+ */
+type JSONValue2724 =
+  | null
+  | boolean
+  | number
+  | string
+  | JSONValue2724[]
+  | { [key: string]: JSONValue2724 };
+
+type Fn2724 = (value: JSONValue2724) => number;
+
+export function sortBy(arr: JSONValue2724[], fn: Fn2724): JSONValue2724[] {
+  return arr.sort((a, b) => fn(a) - fn(b));
 }

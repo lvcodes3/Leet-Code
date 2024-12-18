@@ -106,4 +106,73 @@ describe("30 Days of JavaScript", () => {
 
     expect(JS.argumentsLength({}, null, "3", [null, 3])).toBe(4);
   });
+
+  test("Allow One Function Call", () => {
+    const fn = (a: number, b: number, c: number) => a + b + c;
+    const onceFn = JS.once(fn);
+
+    expect(onceFn(1, 2, 3)).toBe(6);
+    expect(onceFn(2, 3, 4)).toBeUndefined();
+  });
+
+  test("Memoize", () => {
+    let callCount: number = 0;
+
+    function memoizeSum(a: number, b: number): number {
+      callCount++;
+
+      return a + b;
+    }
+
+    function memoizeFibonacci(n: number): number {
+      callCount++;
+
+      if (n <= 1) return 1;
+
+      return memoizeFibonacci(n - 1) + memoizeFibonacci(n + 2);
+    }
+
+    function memoizeFactorial(n: number): number {
+      callCount++;
+
+      if (n <= 1) return 1;
+
+      return memoizeFactorial(n - 1) * n;
+    }
+
+    const memoizedSumFn = JS.memoize(memoizeSum);
+    expect(memoizedSumFn(2, 3)).toBe(5);
+    expect(memoizedSumFn(2, 3)).toBe(5);
+    expect(callCount).toBe(1);
+
+    const memoizedFibFn = JS.memoize(memoizeFibonacci);
+    expect(memoizedFibFn(1)).toBe(1);
+
+    const memoizedFactFn = JS.memoize(memoizeFactorial);
+    expect(memoizedFactFn(1)).toBe(1);
+  });
+
+  test("Is Object Empty", () => {
+    expect(JS.isObjEmpty({})).toBeTruthy();
+    expect(JS.isObjEmpty([])).toBeTruthy();
+
+    expect(JS.isObjEmpty({ a: 1 })).toBeFalsy();
+    expect(JS.isObjEmpty([1, 2, 3])).toBeFalsy();
+  });
+
+  test("Chunk Array", () => {
+    expect(JS.chunkArray([1, 2, 3, 4, 5], 2)).toEqual([[1, 2], [3, 4], [5]]);
+
+    expect(JS.chunkArray([1, 2, 3, 4, 5], 1)).toEqual([
+      [1],
+      [2],
+      [3],
+      [4],
+      [5],
+    ]);
+
+    expect(JS.chunkArray([1, 2, 3], 5)).toEqual([[1, 2, 3]]);
+
+    expect(JS.chunkArray([], 3)).toEqual([]);
+  });
 });
