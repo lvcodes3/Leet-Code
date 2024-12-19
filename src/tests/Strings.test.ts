@@ -56,4 +56,10 @@ describe("Strings Leet Code Problems", () => {
       ""
     );
   });
+
+  test("Roman To Integer", () => {
+    expect(StringFunctions.romanToInt("III")).toBe(3);
+    expect(StringFunctions.romanToInt("LVIII")).toBe(58);
+    expect(StringFunctions.romanToInt("MCMXCIV")).toBe(1994);
+  });
 });
