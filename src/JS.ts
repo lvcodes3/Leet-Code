@@ -1,3 +1,7 @@
+//////////////
+// CLOSURES //
+//////////////
+
 /**
  * 2667. Create Hello World Function - Easy
  *
@@ -97,6 +101,10 @@ export function expect(val: any): ToBeOrNotToBe2704 {
   };
 }
 
+////////////
+// ARRAYS //
+////////////
+
 /**
  * 2634. Filter Elements from Array - Easy
  *
@@ -195,6 +203,10 @@ export function reduce(
 
   return val;
 }
+
+///////////////
+// FUNCTIONS //
+///////////////
 
 /**
  * 2629. Function Compose - Easy
@@ -320,6 +332,10 @@ export function memoize(fn: Function2623): Function2623 {
   };
 }
 
+//////////
+// JSON //
+//////////
+
 /**
  * 2727. Is Object Empty - Easy
  *
@@ -430,4 +446,139 @@ type Fn2724 = (value: JSONValue2724) => number;
 
 export function sortBy(arr: JSONValue2724[], fn: Fn2724): JSONValue2724[] {
   return arr.sort((a, b) => fn(a) - fn(b));
+}
+
+/////////////
+// CLASSES //
+/////////////
+
+/**
+ * 2726. Calculator with Method Chaining - Easy
+ *
+ * Design a Calculator class.
+ * The class should provide the mathematical operations of addition, subtraction, multiplication, division, and exponentiation.
+ * It should also allow consecutive operations to be performed using method chaining.
+ * The Calculator class constructor should accept a number which serves as the initial value of result.
+ *
+ * Your Calculator class should have the following methods:
+ * add - This method adds the given number value to the result and returns the updated Calculator.
+ * subtract - This method subtracts the given number value from the result and returns the updated Calculator.
+ * multiply - This method multiplies the result  by the given number value and returns the updated Calculator.
+ * divide - This method divides the result by the given number value and returns the updated Calculator. If the passed value is 0, an error "Division by zero is not allowed" should be thrown.
+ * power - This method raises the result to the power of the given number value and returns the updated Calculator.
+ * getResult - This method returns the result.
+ */
+export class Calculator {
+  private value: number;
+
+  constructor(value: number) {
+    this.value = value;
+  }
+
+  add(value: number): Calculator {
+    this.value += value;
+    return this;
+  }
+
+  subtract(value: number): Calculator {
+    this.value -= value;
+    return this;
+  }
+
+  multiply(value: number): Calculator {
+    this.value *= value;
+    return this;
+  }
+
+  divide(value: number): Calculator {
+    if (value === 0) throw new Error("Division by zero is not allowed");
+
+    this.value /= value;
+    return this;
+  }
+
+  power(value: number): Calculator {
+    this.value = Math.pow(this.value, value);
+    return this;
+  }
+
+  getResult(): number {
+    return this.value;
+  }
+}
+
+/**
+ * 2695. Array Wrapper - Easy
+ *
+ * Create a class ArrayWrapper that accepts an array of integers in its constructor.
+ * This class should have two features:
+ * When two instances of this class are added together with the + operator, the resulting value is the sum of all the elements in both arrays.
+ * When the String() function is called on the instance, it will return a comma separated string surrounded by brackets. For example, [1,2,3].
+ */
+export class ArrayWrapper {
+  private numberArray: number[];
+
+  constructor(nums: number[]) {
+    this.numberArray = nums;
+  }
+
+  valueOf(): number {
+    let sum: number = 0;
+
+    for (let i = 0; i < this.numberArray.length; i++) {
+      sum += this.numberArray[i];
+    }
+
+    return sum;
+  }
+
+  toString(): string {
+    return JSON.stringify(this.numberArray);
+  }
+}
+
+/////////////////////
+// PROMISES & TIME //
+/////////////////////
+
+/**
+ * 2723. Add Two Promises - Easy
+ *
+ * Given two promises promise1 and promise2, return a new promise.
+ * promise1 and promise2 will both resolve with a number.
+ * The returned promise should resolve with the sum of the two numbers.
+ */
+type P = Promise<number>;
+
+export async function addTwoPromises(promise1: P, promise2: P): P {
+  // // first solution //
+  // const number1 = await promise1;
+  // const number2 = await promise2;
+
+  // return new Promise<number>((resolve, reject) => {
+  //   if (number1 && number2) {
+  //     resolve(number1 + number2);
+  //   } else {
+  //     reject("Error!");
+  //   }
+  // });
+
+  // better solution //
+  return Promise.all([promise1, promise2]).then(
+    ([number1, number2]) => number1 + number2
+  );
+}
+
+/**
+ * 2621. Sleep - Easy
+ *
+ * Given a positive integer millis, write an asynchronous function that sleeps for millis milliseconds.
+ * It can resolve any value.
+ */
+export async function sleep(millis: number): Promise<void> {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, millis);
+  });
 }
