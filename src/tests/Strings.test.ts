@@ -62,4 +62,11 @@ describe("Strings Leet Code Problems", () => {
     expect(StringFunctions.romanToInt("LVIII")).toBe(58);
     expect(StringFunctions.romanToInt("MCMXCIV")).toBe(1994);
   });
+
+  test("Isomorphic Strings", () => {
+    expect(StringFunctions.isIsomorphic("egg", "add")).toBeTruthy();
+    expect(StringFunctions.isIsomorphic("foo", "bar")).toBeFalsy();
+    expect(StringFunctions.isIsomorphic("paper", "title")).toBeTruthy();
+    expect(StringFunctions.isIsomorphic("angel", "luis")).toBeFalsy();
+  });
 });
