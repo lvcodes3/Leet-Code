@@ -33,4 +33,9 @@ describe("Binary Search Tree Leet Code Problems", () => {
 
     expect(BinarySearchTrees.getMinimumDifferenceInBST(t3n1)).toBe(Infinity);
   });
+
+  test("Maximum Depth of Binary Tree", () => {
+    expect(BinarySearchTrees.maxDepth(t1n1)).toBe(3);
+    expect(BinarySearchTrees.maxDepth(t2n1)).toBe(3);
+  });
 });
